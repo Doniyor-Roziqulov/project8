@@ -18,7 +18,7 @@ const SignIn: React.FC<LogInProps> = ({
                     <p className="font-medium text-[#EFEFEF] mb-3">Username</p>
                     <input
                         required
-                        className="rounded-lg bg-[#1F1F22] h-12 w-full"
+                        className="rounded-lg bg-[#1F1F22] h-12 w-full text-white pl-3"
                         type="text"
                         name="username"
                     />
@@ -28,7 +28,7 @@ const SignIn: React.FC<LogInProps> = ({
                     <p className="font-medium text-[#EFEFEF] mb-3">Password</p>
                     <input
                         required
-                        className="rounded-lg bg-[#1F1F22] h-12 w-full"
+                        className="rounded-lg bg-[#1F1F22] h-12 w-full text-white pl-3"
                         type="password"
                         name="password"
                     />

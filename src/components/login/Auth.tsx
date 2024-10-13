@@ -1,13 +1,45 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import logbg from "../../images/logbg.png";
 import logo from "../../images/Logo.svg";
 import LogIn from "./LogIn";
 import SignIn from "./SignIn";
+import {
+    useRegisterUserMutation,
+    useSignInMutation,
+} from "../../redux/api/user-api";
+import { useNavigate } from "react-router-dom";
 
 const Auth = () => {
     const [action, setAction] = useState<string>("Sign In");
+    const [users, { isSuccess }] = useRegisterUserMutation();
+    const [user, { isSuccess: isUserSuccess }] = useSignInMutation();
+    const navigate = useNavigate();
+
+    const handleSendMessage = (e: any) => {
+        e.preventDefault();
+        let formData = new FormData(e.target);
+        let data = Object.fromEntries(formData.entries());
+        user(data);
+    };
+
+    const handleSendLog = (e: any) => {
+        e.preventDefault();
+        let formData = new FormData(e.target);
+        let data = Object.fromEntries(formData.entries());
+        users(data);
+    };
+
+    useEffect(() => {
+        if (isSuccess) {
+            setAction("Log In");
+        }
+        if (isUserSuccess) {
+            navigate("/home");
+        }
+    }, [isSuccess, isUserSuccess, navigate]);
+
     return (
-        <section className="bg-[#000]">
+        <section className="bg-black">
             <div>
                 <div className="flex">
                     <div className="w-1/2 flex items-center justify-center">
@@ -30,9 +62,17 @@ const Auth = () => {
                                     : "Welcome back! Please enter your details."}
                             </p>
                             {action === "Sign In" ? (
-                                <LogIn action={action} setAction={setAction} />
+                                <LogIn
+                                    action={action}
+                                    setAction={setAction}
+                                    handleSendLog={handleSendLog}
+                                />
                             ) : (
-                                <SignIn action={action} setAction={setAction} />
+                                <SignIn
+                                    action={action}
+                                    setAction={setAction}
+                                    handleSendMessage={handleSendMessage}
+                                />
                             )}
                         </div>
                     </div>

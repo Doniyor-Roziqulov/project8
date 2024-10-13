@@ -4,20 +4,20 @@ import { FcGoogle } from "react-icons/fc";
 interface LogInProps {
     action: string;
     setAction: React.Dispatch<React.SetStateAction<string>>;
+    handleSendLog: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const LogIn: React.FC<LogInProps> = ({ action, setAction }) => {
+const LogIn: React.FC<LogInProps> = ({ action, setAction, handleSendLog }) => {
     return (
         <div>
-            <form className="w-[400px]" action="">
+            <form onSubmit={handleSendLog} className="w-[400px]" action="">
                 <div className="mb-5">
                     <p className="font-medium text-[#EFEFEF] mb-3">Name</p>
                     <input
                         required
                         className="rounded-lg bg-[#1F1F22] h-12 w-full"
                         type="text"
-                        name=""
-                        id=""
+                        name="full_name"
                     />
                 </div>
                 <div className="mb-5">
@@ -26,8 +26,7 @@ const LogIn: React.FC<LogInProps> = ({ action, setAction }) => {
                         required
                         className="rounded-lg bg-[#1F1F22] h-12 w-full"
                         type="text"
-                        name=""
-                        id=""
+                        name="username"
                     />
                 </div>
                 <div className="mb-5">
@@ -36,8 +35,7 @@ const LogIn: React.FC<LogInProps> = ({ action, setAction }) => {
                         required
                         className="rounded-lg bg-[#1F1F22] h-12 w-full"
                         type="email"
-                        name=""
-                        id=""
+                        name="email"
                     />
                 </div>
                 <div className="mb-[30px]">
@@ -46,8 +44,7 @@ const LogIn: React.FC<LogInProps> = ({ action, setAction }) => {
                         required
                         className="rounded-lg bg-[#1F1F22] h-12 w-full"
                         type="password"
-                        name=""
-                        id=""
+                        name="password"
                     />
                 </div>
                 <button className="text-white font-semibold leading-5 py-[13px] transition-all hover:bg-white hover:text-[#877EFF] mb-5 bg-[#877EFF] rounded-lg w-full">

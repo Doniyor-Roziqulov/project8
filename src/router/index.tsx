@@ -1,9 +1,8 @@
 import { lazy, LazyExoticComponent } from "react";
 import { useRoutes } from "react-router-dom";
 import { SuspenseComponent as Suspense } from "../utils";
-import Auth from "../components/login/Auth";
+import Auths from "../pages/Auths";
 
-const Home: LazyExoticComponent<any> = lazy(() => import("../pages/home/Home"));
 const About: LazyExoticComponent<any> = lazy(
     () => import("../pages/about/About")
 );
@@ -16,6 +15,11 @@ const Detail: LazyExoticComponent<any> = lazy(
 const Layout: LazyExoticComponent<any> = lazy(
     () => import("../pages/layout/Layout")
 );
+const Auth: LazyExoticComponent<any> = lazy(
+    () => import("../components/login/Auth")
+);
+
+const Home: LazyExoticComponent<any> = lazy(() => import("../pages/home/Home"));
 
 const Routers = () => {
     return useRoutes([
@@ -28,7 +32,23 @@ const Routers = () => {
             ),
             children: [
                 {
+                    path: "/login",
+                    element: (
+                        <Suspense>
+                            <Auth />
+                        </Suspense>
+                    ),
+                },
+                {
                     path: "/",
+                    element: (
+                        <Suspense>
+                            <Auths />
+                        </Suspense>
+                    ),
+                },
+                {
+                    path: "/home",
                     element: (
                         <Suspense>
                             <Home />
@@ -68,14 +88,6 @@ const Routers = () => {
             element: (
                 <Suspense>
                     <h2>404</h2>
-                </Suspense>
-            ),
-        },
-        {
-            path: "/log",
-            element: (
-                <Suspense>
-                    <Auth />
                 </Suspense>
             ),
         },

@@ -3,20 +3,24 @@ import { FcGoogle } from "react-icons/fc";
 interface LogInProps {
     action: string;
     setAction: React.Dispatch<React.SetStateAction<string>>;
+    handleSendMessage: (e: React.FormEvent<HTMLFormElement>) => void;
 }
 
-const SignIn: React.FC<LogInProps> = ({ action, setAction }) => {
+const SignIn: React.FC<LogInProps> = ({
+    action,
+    setAction,
+    handleSendMessage,
+}) => {
     return (
         <div>
-            <form className="w-[400px]" action="">
+            <form onSubmit={handleSendMessage} className="w-[400px]" action="">
                 <div className="mb-5">
                     <p className="font-medium text-[#EFEFEF] mb-3">Username</p>
                     <input
                         required
                         className="rounded-lg bg-[#1F1F22] h-12 w-full"
                         type="text"
-                        name=""
-                        id=""
+                        name="username"
                     />
                 </div>
 
@@ -26,8 +30,7 @@ const SignIn: React.FC<LogInProps> = ({ action, setAction }) => {
                         required
                         className="rounded-lg bg-[#1F1F22] h-12 w-full"
                         type="password"
-                        name=""
-                        id=""
+                        name="password"
                     />
                 </div>
                 <button className="text-white font-semibold leading-5 py-[13px] transition-all hover:bg-white hover:text-[#877EFF] mb-5 bg-[#877EFF] rounded-lg w-full">
